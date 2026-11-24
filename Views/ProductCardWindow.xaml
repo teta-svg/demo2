@@ -1,0 +1,87 @@
+﻿<Window x:Class="demo2.Views.ProductCardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo2.Views"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        FontSize="18"
+        FontFamily="Times New Roman"
+        Background="#FFFFFF"
+        ScrollViewer.CanContentScroll="True"
+        Title="Катрочка товара" Height="1000" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"  Margin="10">
+            <TextBlock Text="Катрочка товара" FontSize="25" FontWeight="Bold" TextAlignment="Center"/>
+            <TextBlock Margin="10" TextAlignment="Center" TextWrapping="Wrap" Text="Название товара"/>
+            <TextBox FontSize="25" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Product.Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Margin="5" TextAlignment="Center" Name="ProductIdBlock">
+                <Run Text="ID: "/>
+                <Run Text="{Binding Product.Id}"/>
+            </TextBlock>
+            <TextBlock Margin="5" TextAlignment="Center" TextWrapping="Wrap" Text="Артикул товара"/>
+            <TextBox TextAlignment="Center" TextWrapping="Wrap" Text="{Binding Product.Artikul, UpdateSourceTrigger=PropertyChanged}"/>
+            <Image Name="ProductImage" Width="250" Margin="0,10"/>
+            <Button Content="{Binding ImageButtonType}" Name="ChangeImageBtn" Click="ChangeImageBtn_Click" Width="250" Padding="20,10" Background="#7FFF00"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+            <TextBlock Text="Категория" Margin="10"/>
+            <ComboBox ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCategory}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="10">
+            <TextBlock Text="Описание товара" Margin="10"/>
+            <TextBox Text="{Binding Product.Description, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10">
+            <TextBlock Text="Производитель" Margin="10"/>
+            <ComboBox ItemsSource="{Binding Manufacturers}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedManufacturer}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10">
+            <TextBlock Text="Поставщик" Margin="10"/>
+            <TextBox Text="{Binding SupplierName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Grid.Column="0" Margin="10">
+            <TextBlock Text="Цена" Margin="10"/>
+            <TextBox Name="PriceBox" TextWrapping="Wrap"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="10">
+            <TextBlock Text="Единица измерения" Margin="10"/>
+            <TextBox Text="{Binding Product.UnitOfMeasurement, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4" Grid.Column="1" Margin="10">
+            <TextBlock Text="Количество на складе" Margin="10"/>
+            <TextBox Name="CountBox" Text="{Binding Product.CountInStock, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" Margin="10">
+            <TextBlock Text="Действующая скидка" Margin="10"/>
+            <TextBox Name="DiscountBox" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <Button Content="{Binding ButtonType}" Name="ConfirmBtn" Click="ConfirmBtn_Click" Grid.Column="1" Grid.Row="5" Margin="10" Padding="10" Background="#00FA9A" VerticalAlignment="Bottom" Width="200" HorizontalAlignment="Right"/>
+        <Button Content="Отмена" Name="CancelBtn" Click="CancelBtn_Click" Grid.Column="0" Grid.Row="5" Margin="10" Padding="10" Background="#7FFF00" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200"/>
+
+    </Grid>
+</Window>

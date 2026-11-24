@@ -53,7 +53,7 @@
             
             <StackPanel Orientation="Vertical" Margin="10">
                 <TextBlock Text="Поиск" Margin="10" TextAlignment="Center"/>
-                <TextBlock Text="{Binding SearchText}" Width="200"/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="200" TextChanged="TextBox_TextChanged"/>
             </StackPanel>
         </StackPanel>
         
@@ -75,11 +75,11 @@
                                 <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="{Binding Image}" Width="100" Grid.Column="0" Margin="10"/>
+                            <Image Name="ProductImage" Loaded="ProductImage_Loaded" Width="100" Grid.Column="0" Margin="10"/>
 
                             <StackPanel Orientation="Vertical" Grid.Column="1">
                                 <TextBlock FontSize="20" FontWeight="Bold" TextWrapping="Wrap" Margin="5">
-                                    <Run Text="{Binding Category}"/>
+                                    <Run Text="{Binding Category.Name}"/>
                                     <Run Text=" | "/>
                                     <Run Text="{Binding Name}"/>
                                 </TextBlock>
@@ -91,12 +91,12 @@
 
                                 <TextBlock TextWrapping="Wrap" Margin="5">
                                     <Run Text="Производитель: "/>
-                                    <Run Text="{Binding ManufacturerName}"/>
+                                    <Run Text="{Binding Manufacturer.Name}"/>
                                 </TextBlock>
 
                                 <TextBlock TextWrapping="Wrap" Margin="5">
                                     <Run Text="Поставщик: "/>
-                                    <Run Text="{Binding SupplierName}"/>
+                                    <Run Text="{Binding Supplier.Name}"/>
                                 </TextBlock>
 
                                 <StackPanel Orientation="Vertical" Margin="2">
@@ -132,7 +132,6 @@
 
         <StackPanel Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" Name="ControlBtns">
             <Button Content="Добавить" Name="AddProductBtn" Click="AddProductBtn_Click" Margin="10" Padding="10,5" FontSize="20" Background="#00FA9A" Width="200"/>
-            <Button Content="Обновить" Name="UpdateProductBtn" Click="UpdateProductBtn_Click" Margin="10" Padding="20,10" FontSize="20" Background="#00FA9A" Width="200"/>
             <Button Content="Удалить" Name="DeleteProductBtn" Click="DeleteProductBtn_Click" Margin="10" Padding="20,10" FontSize="20" Background="#00FA9A" Width="200"/>
         </StackPanel>
     </Grid>
