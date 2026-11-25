@@ -29,6 +29,8 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Content="Заказы" Name="OpenOrderBtn" Margin="10,0" VerticalAlignment="Center" 
+                    Padding="10,5" Background="#7FFF00" Click="OpenOrderBtn_Click"/>
             <TextBlock Text="{Binding User.UserName}" Margin="10,0" TextAlignment="Center" VerticalAlignment="Center"/>
             <Button Content="Выйти" Name="LogoutBtn" Click="LogoutBtn_Click" Margin="10" 
                     VerticalAlignment="Center" Padding="10,5" Background="#00FA9A"/>

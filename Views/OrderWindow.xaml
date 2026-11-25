@@ -1,0 +1,105 @@
+﻿<Window x:Class="demo2.Views.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:demo2.Views"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        FontSize="18"
+        FontFamily="Times New Roman"
+        Background="#FFFFFF"
+        Title="Список заказов" Height="750" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <Image Source="/Images/Icon.png" Width="50" Margin="10"/>
+            <TextBlock Text="Обувь" FontSize="20" VerticalAlignment="Center" Margin="10"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Content="Товары" Name="OpenProductsBtn" Margin="10,0" VerticalAlignment="Center" 
+            Padding="10,5" Background="#7FFF00" Click="OpenProductsBtn_Click"/>
+            <TextBlock Text="{Binding User.UserName}" Margin="10,0" TextAlignment="Center" VerticalAlignment="Center"/>
+            <Button Content="Выйти" Name="LogoutBtn" Click="LogoutBtn_Click"  Margin="10" 
+            VerticalAlignment="Center" Padding="10,5" Background="#00FA9A"/>
+        </StackPanel>
+
+        <TextBlock Text="Список заказов" Grid.Column="0" Grid.Row="1" FontSize="24" FontWeight="Bold" Margin="10"/>
+
+        <ListBox Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemsSource="{Binding Orders}" SelectedItem="{Binding Order}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="#7FFF00" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Vertical" Grid.Column="0">
+
+                                <TextBlock Text="Номер заказа" TextWrapping="Wrap" Margin="5"/>
+                                <TextBlock Text="{Binding IdOrder}" TextWrapping="Wrap" Margin="5"/>
+                                
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Vertical" Grid.Column="1">
+
+                                <TextBlock Text="ФИО заказчика" TextWrapping="Wrap" Margin="5"/>
+                                <TextBlock TextWrapping="Wrap" Margin="5">
+                                    <Run Text="{Binding Person.Surname}"/>
+                                    <Run Text=" "/>
+                                    <Run Text="{Binding Person.FirstName}"/>
+                                    <Run Text=" "/>
+                                    <Run Text="{Binding Person.Patronymic}"/>
+                                </TextBlock>
+                                
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Vertical" Grid.Column="2">
+
+                                <TextBlock Text="Стоимость заказа"  HorizontalAlignment="Right" TextWrapping="Wrap" Margin="5"/>
+                                <TextBlock Text="{Binding TotalPrice, StringFormat={}{0:0.##} руб.}" TextAlignment="Right" TextWrapping="Wrap" Margin="5"/>
+
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="3">
+
+                                <TextBlock Text="Статус заказа" TextWrapping="Wrap" Margin="5"/>
+                                <TextBlock Text="{Binding OrderStatus}" TextWrapping="Wrap" Margin="5" TextAlignment="Right"/>
+
+                            </StackPanel>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10" VerticalAlignment="Center" Name="ControlBtns">
+            <Button Content="Добавить" Name="AddOrderBtn" Click="AddOrderBtn_Click"  Margin="10" Padding="10,5" FontSize="20" Background="#00FA9A" Width="200"/>
+            <Button Content="Удалить" Name="DeleteOrderBtn" Click="DeleteOrderBtn_Click"  Margin="10" Padding="20,10" FontSize="20" Background="#00FA9A" Width="200"/>
+        </StackPanel>
+    </Grid>
+</Window>

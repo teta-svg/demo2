@@ -86,7 +86,7 @@ namespace demo2.Services
             return products.ToList();
         }
 
-        private Product? GetProductByIdFromDb(int productId)
+        public Product? GetProductByIdFromDb(int productId)
         {
             return _context.Products
                 .Include(p => p.IdCategoryNavigation)
@@ -328,6 +328,31 @@ namespace demo2.Services
                 return false;
             }
 
+        }
+
+        public ObservableCollection<OrderItemCard> GetProducts()
+        {
+            var ordersFromDb = GetProductsFromDb(0);
+
+            ObservableCollection<OrderItemCard> products = [];
+
+            foreach (var product in ordersFromDb)
+            {
+                decimal? currentOrderPrice = product.CurrentDiscount > 0 ?
+                    product.Price - product.Price * product.CurrentDiscount / 100m :
+                    product.Price;
+
+                products.Add(new OrderItemCard()
+                {
+                    IdProduct = product.IdProduct,
+                    Name = product.Name,
+                    Artikul = product.Artikul,
+                    Price = currentOrderPrice,
+                    CountInStock = product.CountInStock
+                });
+            }
+
+            return products;
         }
     }
 }

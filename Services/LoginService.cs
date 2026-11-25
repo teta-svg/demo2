@@ -29,7 +29,8 @@ namespace demo2.Services
                 {
                     Id = 0,
                     UserName = "Гость",
-                    Role = "Гость"
+                    Role = "Гость",
+                    IdPerson = 0
                 };
 
                 return userContext;
@@ -44,7 +45,8 @@ namespace demo2.Services
                 {
                     Id = user.IdUser,
                     UserName = $"{user.IdPersonNavigation.Surname} {user.IdPersonNavigation.FirstName} {user.IdPersonNavigation.Patronymic}",
-                    Role = user.IdUserRoleNavigation.Name
+                    Role = user.IdUserRoleNavigation.Name,
+                    IdPerson = user.IdPerson
                 };
 
                 return userContext;

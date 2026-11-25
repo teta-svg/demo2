@@ -38,6 +38,7 @@ namespace demo2.Views
             {
                 ControlBtns.Visibility = Visibility.Collapsed;
                 ProductsSearch.Visibility = Visibility.Collapsed;
+                OpenOrderBtn.Visibility = Visibility.Collapsed;
             }
             else if (user.Role.Contains("Менеджер"))
             {
@@ -195,6 +196,14 @@ namespace demo2.Views
 
                 image.Source = bmp;
             }
+        }
+
+        private void OpenOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow = new OrderWindow(User);
+            Application.Current.MainWindow.Show();
+
+            this.Close();
         }
     }
 }
