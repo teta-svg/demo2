@@ -53,17 +53,25 @@ namespace demo2.Views
                 Product = new();
             }
 
-            string imagePath = string.IsNullOrEmpty(Product?.Image) ? 
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "picture.png")
-                : Product.Image;
+            string imagePath = Product?.Image ?? "";
+
+            if (string.IsNullOrWhiteSpace(imagePath) || !File.Exists(imagePath))
+            {
+                imagePath = Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "Images",
+                    "picture.png"
+                );
+            }
 
             if (File.Exists(imagePath))
             {
                 var bmp = new BitmapImage();
                 bmp.BeginInit();
                 bmp.CacheOption = BitmapCacheOption.OnLoad;
-                bmp.UriSource = new Uri(imagePath);
+                bmp.UriSource = new Uri(imagePath, UriKind.Absolute);
                 bmp.EndInit();
+
                 ProductImage.Source = bmp;
             }
 
