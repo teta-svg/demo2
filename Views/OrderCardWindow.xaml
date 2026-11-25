@@ -10,7 +10,7 @@
         FontFamily="Times New Roman"
         Background="#FFFFFF"
         ScrollViewer.CanContentScroll="True"
-        Title="Катрочка товара" Height="1000" Width="600">
+        Title="Карточка заказа" Height="1000" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

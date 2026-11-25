@@ -186,12 +186,26 @@ namespace demo2.Views
         {
             var image = (System.Windows.Controls.Image)sender;
 
-            if (image.DataContext is ProductCard p && !string.IsNullOrEmpty(p.Image) && System.IO.File.Exists(p.Image))
+            if (image.DataContext is not ProductCard p)
+                return;
+
+            string imagePath = p.Image;
+
+            if (string.IsNullOrWhiteSpace(imagePath) || !System.IO.File.Exists(imagePath))
+            {
+                imagePath = System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory,
+                    "Images",
+                    "picture.png"
+                );
+            }
+
+            if (System.IO.File.Exists(imagePath))
             {
                 var bmp = new BitmapImage();
                 bmp.BeginInit();
                 bmp.CacheOption = BitmapCacheOption.OnLoad;
-                bmp.UriSource = new Uri(p.Image);
+                bmp.UriSource = new Uri(imagePath, UriKind.Absolute);
                 bmp.EndInit();
 
                 image.Source = bmp;

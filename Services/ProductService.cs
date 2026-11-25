@@ -48,6 +48,8 @@ namespace demo2.Services
                 BackgroundColor = item.CurrentDiscount > 15 ? " #2E8B57" : "#7FFF00"
             };
 
+            product.BackgroundColor = item.CountInStock == 0 ? "#9ACEEB" : product.BackgroundColor;
+
             Visibility oldProceVisibilyty = product.OldPrice == product.Price ? Visibility.Collapsed : Visibility.Visible;
 
             product.OldPriceVisibility = oldProceVisibilyty;

@@ -103,7 +103,7 @@
 
                                 <StackPanel Orientation="Vertical" Margin="2">
                                     <TextBlock Text="Цена: "/>
-                                    <TextBlock Text="{Binding OldPrice, StringFormat={}{0:0.##} руб.}" TextDecorations="Strikethrough" Visibility="{Binding OldPriceVisibility}"/>
+                                    <TextBlock Foreground="Red" Text="{Binding OldPrice, StringFormat={}{0:0.##} руб.}" TextDecorations="Strikethrough" Visibility="{Binding OldPriceVisibility}"/>
                                     <TextBlock Text="{Binding Price, StringFormat={}{0:0.##} руб.}" FontSize="23" FontWeight="Bold"/>
                                 </StackPanel>
 

@@ -22,6 +22,13 @@ namespace demo2.Views
 
             Orders = _orderService.GetAllOrders();
 
+            if (user.Role.Contains("Менеджер"))
+            {
+                
+                DeleteOrderBtn.Visibility = Visibility.Collapsed;
+                AddOrderBtn.Visibility = Visibility.Collapsed;
+            }
+
             DataContext = this;
         }
 
@@ -67,6 +74,11 @@ namespace demo2.Views
 
         private void ListBoxItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (User.Role.Contains("Менеджер"))
+            {
+                return;
+            }
+
             if (Order == null)
             {
                 MessageBox.Show("Выберите заказ", "ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

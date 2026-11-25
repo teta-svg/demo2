@@ -130,4 +130,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Doc\" />
+  </ItemGroup>
+
 </Project>
